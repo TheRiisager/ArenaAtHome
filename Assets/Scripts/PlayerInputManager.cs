@@ -20,7 +20,7 @@ public class PlayerInputManager : MonoBehaviour
             _instance = this;
         }
         playerControls = new PlayerControls();
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void OnEnable(){
