@@ -7,7 +7,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] float verticalCameraSpeed = 20f;
     [SerializeField] float horizontalCameraSpeed = 20f;
     [SerializeField] float cameraClampAngle = 90f;
-    [SerializeField] private float playerSpeed = 2.0f;
+    private float playerSpeed = 2.0f;
+    [SerializeField] private float runSpeed = 5.0f;
+    [SerializeField] private float walkSpeed = 2.0f;
     [SerializeField]private float jumpHeight = 1.0f;
     [SerializeField]private float gravityValue = -9.81f;
     private Vector3 playerVelocity;
@@ -38,6 +40,14 @@ public class PlayerMovementController : MonoBehaviour
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
+        }
+
+        if(inputManager.isSprinting()){
+            Debug.Log("setting to sprintspeed");
+            playerSpeed = runSpeed;
+        } else if(!inputManager.isSprinting() && groundedPlayer){
+            Debug.Log("setting to walkspeed");
+            playerSpeed = walkSpeed;
         }
 
         Vector2 movement = inputManager.GetPlayerMovement();

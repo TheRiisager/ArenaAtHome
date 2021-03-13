@@ -43,8 +43,11 @@ public class PlayerInputManager : MonoBehaviour
 
     public bool PlayerJumped()
     {
-        Debug.Log("JUMP!");
         return playerControls.Default.Jump.triggered;
         
+    }
+    public bool isSprinting()
+    {
+        return (playerControls.Default.Sprint.activeControl != null) ? true : false;
     }
 }
