@@ -49,7 +49,7 @@ public class PlayerMovementController : MonoBehaviour
             playerSpeed = walkSpeed;
         }
 
-        animator.SetFloat("playerSpeed", playerSpeed);
+        animator.SetFloat("playerSpeed", characterController.velocity.z);
 
         Vector2 movement = inputManager.GetPlayerMovement();
         Vector3 move = new Vector3(movement.x, 0f, movement.y);
