@@ -20,6 +20,8 @@ public class DudeController : MonoBehaviour
         if(timeRemaining > 0){
             timeRemaining -= Time.deltaTime;
         } else {
+            Instantiate(Resources.Load(""))
+
             timeRemaining = timerDuration;
         }
     }
