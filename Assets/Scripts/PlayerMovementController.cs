@@ -42,11 +42,9 @@ public class PlayerMovementController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        if(inputManager.isSprinting()){
-            Debug.Log("setting to sprintspeed");
+        if(inputManager.isSprinting() && groundedPlayer){
             playerSpeed = runSpeed;
         } else if(!inputManager.isSprinting() && groundedPlayer){
-            Debug.Log("setting to walkspeed");
             playerSpeed = walkSpeed;
         }
 
