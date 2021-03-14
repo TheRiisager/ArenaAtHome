@@ -18,8 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     private PlayerInputManager inputManager;
     private CharacterController characterController;
     private Vector3 startingRotation;
-
-    [SerializeField] private Animator animator;
+    [SerializeField] Animator animator;
 
     void Awake(){
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
