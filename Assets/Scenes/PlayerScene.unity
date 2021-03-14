@@ -217,7 +217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &583811533
 GameObject:
@@ -310,7 +310,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1816495880
 GameObject:
@@ -390,11 +390,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816495880}
   m_LocalRotation: {x: 0.037199732, y: -0, z: -0, w: 0.9993079}
-  m_LocalPosition: {x: -4.405232, y: 2.3443127, z: -4.2415943}
+  m_LocalPosition: {x: -0.28499985, y: 1.629, z: -3.089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4282899511587192414}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 4.264, y: 0, z: 0}
 --- !u!114 &1816495884
 MonoBehaviour:
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 5866666020039227598}
   m_Layer: 0
   m_Name: paladin_prop_j_nordstrom
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2042,6 +2042,7 @@ MonoBehaviour:
   jumpHeight: 1
   gravityValue: -9.81
   cameraFollowTarget: {fileID: 4282899509524644838}
+  animator: {fileID: 5866666020039227598}
 --- !u!1 &4282899511263629382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,9 +2125,8 @@ Transform:
   - {fileID: 4282899511263629383}
   - {fileID: 4282899509544274908}
   - {fileID: 4282899509782886085}
-  - {fileID: 1816495883}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4297664879506108289
 GameObject:
