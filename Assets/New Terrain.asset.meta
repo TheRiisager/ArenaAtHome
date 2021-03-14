@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ddf5a43c7c8237348bc7cf941b49c611
+=======
+guid: 65e139e0248eb644ea5d8a37049cbb3f
+>>>>>>> mads
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 15600000
