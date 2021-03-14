@@ -18,12 +18,13 @@ public class PlayerMovementController : MonoBehaviour
     private PlayerInputManager inputManager;
     private CharacterController characterController;
     private Vector3 startingRotation;
+    [SerializeField] Animator animator;
 
     void Awake(){
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
         inputManager = PlayerInputManager.Instance;
         characterController = GetComponent<CharacterController>();
-        Debug.Log(startingRotation);
+
     }
     void Update()
     {
@@ -47,6 +48,8 @@ public class PlayerMovementController : MonoBehaviour
         } else if(!inputManager.isSprinting() && groundedPlayer){
             playerSpeed = walkSpeed;
         }
+
+        animator.SetFloat("playerSpeed", playerSpeed);
 
         Vector2 movement = inputManager.GetPlayerMovement();
         Vector3 move = new Vector3(movement.x, 0f, movement.y);
