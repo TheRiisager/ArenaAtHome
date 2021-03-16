@@ -10,10 +10,17 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    private PlayerInputManager inputManager;
+
     // Update is called once per frame
+    void Awake()
+    {
+        inputManager = PlayerInputManager.Instance;
+
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (inputManager.PlayerPaused() == true)
         {
             if (GamePaused)
             {
