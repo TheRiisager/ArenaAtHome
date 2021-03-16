@@ -13,7 +13,12 @@ public class EnemyScript : MonoBehaviour
 
     Vector3 targetPos;
 
+    private int currentHealth = 100; 
+    private int maxhealth = 100; 
 
+    private bool isDead = false;
+
+    //[SerializeField] private HealthDisplay healthDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +33,23 @@ public class EnemyScript : MonoBehaviour
         targetPos = player.transform.position;
         navMeshAgent.SetDestination(targetPos);
         navMeshAgent.transform.position += transform.forward * Time.deltaTime;
+
+         if (isDead) {
+             Debug.Log("dead");
+            Destroy(this.gameObject);
+         } 
+
+        currentHealth = Mathf.Max(currentHealth, 0);
+
+        if (currentHealth <= 0) {
+            isDead = true;
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("thats alot of damage");
+        currentHealth -= damage;
+        //healthDisplay.SetCurrentHealth(healthDisplay.GetCurrentHealth() - damage);
     }
 }

@@ -19,10 +19,15 @@ public class PlayerMovementController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 startingRotation;
     [SerializeField] Animator animator;
+
     private Vector3 lastPosition;
     private Transform transform;
 
     [SerializeField] Transform characterTransform;
+
+    private float attackRadius = 5.0f;
+    public LayerMask targetLayerMask = new LayerMask();
+
 
     void Awake(){
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
@@ -72,7 +77,7 @@ public class PlayerMovementController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
-        
+
 
         setAnimatorParams();
     }
@@ -99,5 +104,17 @@ public class PlayerMovementController : MonoBehaviour
         if(!characterController.isGrounded){
             animator.SetTrigger("Jump");
         }
+        
+    }
+
+    void OnCollisionStay(Collision other) {
+        if (inputManager.PlayerAttack()){
+        Debug.Log("collidere");
+        other.gameObject.GetComponent<EnemyScript>().TakeDamage(25);
+
+        }
+
+        this.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
+
     }
 }
