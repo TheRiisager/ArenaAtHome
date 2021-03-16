@@ -19,12 +19,17 @@ public class PlayerMovementController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 startingRotation;
     [SerializeField] Animator animator;
+    private Vector3 lastPosition;
+    private Transform transform;
+
+    [SerializeField] Transform characterTransform;
 
     void Awake(){
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
         inputManager = PlayerInputManager.Instance;
         characterController = GetComponent<CharacterController>();
-
+        transform = GetComponent<Transform>();
+        lastPosition = transform.position;
     }
     void Update()
     {
@@ -35,6 +40,11 @@ public class PlayerMovementController : MonoBehaviour
         startingRotation.y += deltaInput.y * horizontalCameraSpeed * Time.deltaTime;
         startingRotation.y = Mathf.Clamp(startingRotation.y, -cameraClampAngle, cameraClampAngle);
         cameraFollowTarget.rotation = Quaternion.Euler(-startingRotation.y, startingRotation.x, 0f);
+
+        //rotate character
+        Quaternion desiredCharacterRotation = cameraFollowTarget.rotation;
+        desiredCharacterRotation.Set(0,desiredCharacterRotation.y,0,desiredCharacterRotation.w);
+        transform.rotation = desiredCharacterRotation;
 
         //move
         groundedPlayer = characterController.isGrounded;
@@ -49,8 +59,6 @@ public class PlayerMovementController : MonoBehaviour
             playerSpeed = walkSpeed;
         }
 
-        animator.SetFloat("playerSpeed", characterController.velocity.z);
-
         Vector2 movement = inputManager.GetPlayerMovement();
         Vector3 move = new Vector3(movement.x, 0f, movement.y);
         move = cameraFollowTarget.forward * move.z + cameraFollowTarget.right * move.x;
@@ -64,5 +72,32 @@ public class PlayerMovementController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
+        
+
+        setAnimatorParams();
+    }
+
+    void LateUpdate()
+    {
+        lastPosition = transform.position;
+    }
+
+    float calculateVelocity()
+    {
+        float velocity;
+        float distance = Vector3.Distance(lastPosition, transform.position);
+        
+        velocity = distance / Time.deltaTime;
+
+        return velocity;
+    }
+
+    void setAnimatorParams()
+    {
+        animator.SetFloat("Speed", calculateVelocity());
+        
+        if(!characterController.isGrounded){
+            animator.SetTrigger("Jump");
+        }
     }
 }
