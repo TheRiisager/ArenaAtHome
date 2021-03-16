@@ -19,7 +19,7 @@ public class PlayerMovementController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 startingRotation;
     [SerializeField] Animator animator;
-    private float attackRadius = 2.0f;
+    private float attackRadius = 5.0f;
     public LayerMask targetLayerMask = new LayerMask();
 
     void Awake(){
@@ -67,13 +67,21 @@ public class PlayerMovementController : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
     
-        if (inputManager.PlayerAttack()){
-            Debug.Log("tester at attack bliver kaldt");
-            var colliders = Physics.OverlapSphere(transform.position, attackRadius, targetLayerMask);
-            if (colliders.Length > 0){
-                //enemies loses health
-            }
+        
             
+
+            
+        
+    }
+
+    void OnCollisionStay(Collision other) {
+        if (inputManager.PlayerAttack()){
+        Debug.Log("collidere");
+        other.gameObject.GetComponent<EnemyScript>().TakeDamage(25);
+
         }
+
+        this.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
+
     }
 }
