@@ -63,4 +63,8 @@ public class PlayerInputManager : MonoBehaviour
         return playerControls.Default.Pause.triggered;
 
     }
+    public bool PlayerAttack()
+    {
+        return playerControls.Default.Attack.triggered;
+    }
 }

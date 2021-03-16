@@ -19,6 +19,8 @@ public class PlayerMovementController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 startingRotation;
     [SerializeField] Animator animator;
+    private float attackRadius = 2.0f;
+    public LayerMask targetLayerMask = new LayerMask();
 
     void Awake(){
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
@@ -64,5 +66,14 @@ public class PlayerMovementController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
+    
+        if (inputManager.PlayerAttack()){
+            Debug.Log("tester at attack bliver kaldt");
+            var colliders = Physics.OverlapSphere(transform.position, attackRadius, targetLayerMask);
+            if (colliders.Length > 0){
+                //enemies loses health
+            }
+            
+        }
     }
 }
