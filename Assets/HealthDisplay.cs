@@ -9,16 +9,16 @@ public class HealthDisplay : MonoBehaviour
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private Image healthFill;
 
-    [SerializeField] private int currentHealth = 100;
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float currentHealth = 1000000.0f;
+    [SerializeField] private float maxHealth = 1000000.0f;
     [SerializeField] private bool useHSVColor = false;
 
-    public void SetCurrentHealth(int val) => currentHealth = val;
-    public int GetCurrentHealth() => currentHealth;
+    public void SetCurrentHealth(float val) => currentHealth = val;
+    public float GetCurrentHealth() => currentHealth;
 
     private void FixedUpdate()
     {
-        healthText.text = currentHealth.ToString();
+        //healthText.text = currentHealth.ToString();
         healthFill.fillAmount = (float)currentHealth / maxHealth;
 
         if (useHSVColor)
