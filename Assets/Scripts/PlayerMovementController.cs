@@ -105,12 +105,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         animator.SetFloat("Speed", calculateVelocity());
 
-        if (!characterController.isGrounded)
-        {
-            animator.SetTrigger("Jump");
-        }
-
-        //if(animator.Get)
         if (inputManager.PlayerAttack())
         {
             animator.SetTrigger("Attack");
@@ -122,7 +116,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (inputManager.PlayerAttack())
         {
-            Debug.Log("collidere");
             other.gameObject.GetComponent<EnemyScript>().TakeDamage(25);
         }
 

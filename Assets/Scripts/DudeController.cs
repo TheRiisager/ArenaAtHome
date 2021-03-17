@@ -20,7 +20,8 @@ public class DudeController : MonoBehaviour
         if(timeRemaining > 0){
             timeRemaining -= Time.deltaTime;
         } else {
-            Instantiate(Resources.Load(""));
+            int random = Random.Range(0, spawnPoints.Length - 1);
+            Instantiate(Resources.Load("small_dude_prefab"), spawnPoints[random]);
 
             timeRemaining = timerDuration;
         }
