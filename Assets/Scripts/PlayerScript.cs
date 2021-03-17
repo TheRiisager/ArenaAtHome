@@ -31,9 +31,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("flextape cant fix that");
-        Debug.Log(currentHealth);
-        currentHealth -= damage ;
+        currentHealth -= damage;
         //healthDisplay.SetCurrentHealth(healthDisplay.GetCurrentHealth() - damage);
     }
 

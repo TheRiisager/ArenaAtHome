@@ -10,8 +10,8 @@ public class PlayerMovementController : MonoBehaviour
     private float playerSpeed = 2.0f;
     [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] private float walkSpeed = 2.0f;
-    [SerializeField]private float jumpHeight = 1.0f;
-    [SerializeField]private float gravityValue = -9.81f;
+    [SerializeField] private float jumpHeight = 1.0f;
+    [SerializeField] private float gravityValue = -9.81f;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     [SerializeField] private Transform cameraFollowTarget;
@@ -29,7 +29,8 @@ public class PlayerMovementController : MonoBehaviour
     public LayerMask targetLayerMask = new LayerMask();
 
 
-    void Awake(){
+    void Awake()
+    {
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
         inputManager = PlayerInputManager.Instance;
         characterController = GetComponent<CharacterController>();
@@ -40,7 +41,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         //rotate
         Vector2 deltaInput = inputManager.GetMouseDelta();
-        
+
         startingRotation.x += deltaInput.x * verticalCameraSpeed * Time.deltaTime;
         startingRotation.y += deltaInput.y * horizontalCameraSpeed * Time.deltaTime;
         startingRotation.y = Mathf.Clamp(startingRotation.y, -cameraClampAngle, cameraClampAngle);
@@ -48,7 +49,7 @@ public class PlayerMovementController : MonoBehaviour
 
         //rotate character
         Quaternion desiredCharacterRotation = cameraFollowTarget.rotation;
-        desiredCharacterRotation.Set(0,desiredCharacterRotation.y,0,desiredCharacterRotation.w);
+        desiredCharacterRotation.Set(0, desiredCharacterRotation.y, 0, desiredCharacterRotation.w);
         transform.rotation = desiredCharacterRotation;
 
         //move
@@ -58,9 +59,12 @@ public class PlayerMovementController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        if(inputManager.isSprinting() && groundedPlayer){
+        if (inputManager.isSprinting() && groundedPlayer)
+        {
             playerSpeed = runSpeed;
-        } else if(!inputManager.isSprinting() && groundedPlayer){
+        }
+        else if (!inputManager.isSprinting() && groundedPlayer)
+        {
             playerSpeed = walkSpeed;
         }
 
@@ -91,7 +95,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         float velocity;
         float distance = Vector3.Distance(lastPosition, transform.position);
-        
+
         velocity = distance / Time.deltaTime;
 
         return velocity;
@@ -100,18 +104,26 @@ public class PlayerMovementController : MonoBehaviour
     void setAnimatorParams()
     {
         animator.SetFloat("Speed", calculateVelocity());
-        
-        if(!characterController.isGrounded){
+
+        if (!characterController.isGrounded)
+        {
             animator.SetTrigger("Jump");
         }
-        
+
+        //if(animator.Get)
+        if (inputManager.PlayerAttack())
+        {
+            animator.SetTrigger("Attack");
+        }
+
     }
 
-    void OnCollisionStay(Collision other) {
-        if (inputManager.PlayerAttack()){
-        Debug.Log("collidere");
-        other.gameObject.GetComponent<EnemyScript>().TakeDamage(25);
-
+    void OnCollisionStay(Collision other)
+    {
+        if (inputManager.PlayerAttack())
+        {
+            Debug.Log("collidere");
+            other.gameObject.GetComponent<EnemyScript>().TakeDamage(25);
         }
 
         this.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
