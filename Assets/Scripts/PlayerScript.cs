@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 
-    private float currentHealth = 1000000.0f;
+    private float currentHealth = 1000.0f;
+
+    [SerializeField] private HealthDisplay healthDisplay;
     private int maxhealth = 100;
 
     private bool isDead = false;
@@ -32,7 +34,8 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        //healthDisplay.SetCurrentHealth(healthDisplay.GetCurrentHealth() - damage);
+        Debug.Log(currentHealth);
+        healthDisplay.SetCurrentHealth(healthDisplay.GetCurrentHealth() - damage);
     }
 
 
