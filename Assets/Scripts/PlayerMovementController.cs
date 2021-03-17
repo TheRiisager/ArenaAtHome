@@ -110,6 +110,7 @@ public class PlayerMovementController : MonoBehaviour
             animator.SetTrigger("Jump");
         }
 
+        //if(animator.Get)
         if (inputManager.PlayerAttack())
         {
             animator.SetTrigger("Attack");
@@ -123,7 +124,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             Debug.Log("collidere");
             other.gameObject.GetComponent<EnemyScript>().TakeDamage(25);
-
         }
 
         this.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
