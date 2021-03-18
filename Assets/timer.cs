@@ -8,9 +8,12 @@ public class timer : MonoBehaviour
     private Text thisText;
     private int tid;
 
+    private float timeSurvived;
+
     void Start()
     {
         thisText = GetComponent<Text>();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Update()
@@ -18,10 +21,17 @@ public class timer : MonoBehaviour
 
         float t = Time.timeSinceLevelLoad;
 
-        float timeSurvived = t;
+        timeSurvived = t;
 
         // update text of Text element
         thisText.text = "Time: " + t;
+
+    }
+
+    public float GetTimeSurvived()
+    {
+        Debug.Log("Tid overløvet" + timeSurvived);
+        return timeSurvived;
     }
 
 }

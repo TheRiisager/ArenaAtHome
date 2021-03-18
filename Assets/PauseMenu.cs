@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
+    [SerializeField] AudioSource pauseMusic;
+
+    [SerializeField] AudioSource gameMusic;
     public static bool GamePaused = false;
 
     public GameObject pauseMenuUI;
@@ -16,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     void Awake()
     {
         inputManager = PlayerInputManager.Instance;
+        gameMusic.Play();
+        pauseMusic.Pause();
 
     }
     void Update()
@@ -38,12 +43,18 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GamePaused = false;
+        gameMusic.Play();
+        pauseMusic.Pause();
+
     }
     void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GamePaused = true;
+        pauseMusic.Play();
+        gameMusic.Pause();
+
     }
     public void Restart()
     {
