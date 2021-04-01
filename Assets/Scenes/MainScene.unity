@@ -1244,6 +1244,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe5ac50db07f134f884fdf666f86dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sightRange: 0
+  playerInSightRange: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 0
 --- !u!195 &584171249
 NavMeshAgent:
   m_ObjectHideFlags: 0

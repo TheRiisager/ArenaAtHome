@@ -18,6 +18,15 @@ public class EnemyScript : MonoBehaviour
 
     private bool isDead = false;
 
+    // States
+    public float sightRange;
+    public bool playerInSightRange;
+
+    // Patroling
+    public Vector3 walkPoint;
+    bool walkPointSet;
+    public float walkPointRange;
+
     //[SerializeField] private HealthDisplay healthDisplay;
 
     // Start is called before the first frame update
@@ -31,9 +40,17 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPos = player.transform.position;
-        navMeshAgent.SetDestination(targetPos);
-        navMeshAgent.transform.position += transform.forward * Time.deltaTime;
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange);
+
+        if (!playerInSightRange)
+        {
+            Patroling();
+        }
+
+        if (playerInSightRange)
+        {
+            ChaseAndAttackPlayer();
+        }
 
         if (isDead)
         {
@@ -46,6 +63,48 @@ public class EnemyScript : MonoBehaviour
         {
             isDead = true;
         }
+    }
+
+    private void Patroling()
+    {
+        if (!walkPointSet)
+        {
+            SearchWalkPoint();
+        }
+
+        if (walkPointSet)
+        {
+            navMeshAgent.SetDestination(walkPoint);
+        }
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        // Walkpoint reached
+        if (distanceToWalkPoint.magnitude < 1f)
+        {
+            walkPointSet = false;
+        }
+    }
+
+    private void SearchWalkPoint()
+    {
+        // Calculate random point in range
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f))
+        {
+            walkPointSet = true;
+        }
+    }
+
+    public void ChaseAndAttackPlayer()
+    {
+        targetPos = player.transform.position;
+        navMeshAgent.SetDestination(targetPos);
+        navMeshAgent.transform.position += transform.forward * Time.deltaTime;
     }
 
     public void TakeDamage(int damage)
