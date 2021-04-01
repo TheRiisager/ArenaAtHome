@@ -25,7 +25,7 @@ public class PlayerMovementController : MonoBehaviour
 
     [SerializeField] Transform characterTransform;
 
-    private float attackRadius = 5.0f;
+    //private float attackRadius = 5.0f;
     public LayerMask targetLayerMask = new LayerMask();
 
 

@@ -10,9 +10,14 @@ public class PlayerScript : MonoBehaviour
     private float currentHealth = 1000.0f;
 
     [SerializeField] private HealthDisplay healthDisplay;
-    private int maxhealth = 100;
+    private float maxhealth = 1000.0f;
 
     private bool isDead = false;
+
+    private void Start()
+    {
+        currentHealth = maxhealth;
+    }
 
 
     void Update()
