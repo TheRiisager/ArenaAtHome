@@ -24,8 +24,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (isDead)
         {
-            Debug.Log("dead");
-
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Destroy(this.gameObject);
         }
@@ -41,7 +39,6 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
         healthDisplay.SetCurrentHealth(healthDisplay.GetCurrentHealth() - damage);
     }
 

@@ -14,8 +14,6 @@ public class tidSurvived : MonoBehaviour
         thisText = GetComponent<Text>();
         tidtager = GetComponent<timer>();
         float t = tidtager.GetTimeSurvived();
-        thisText.text = "Time survived: " + t;
-        Debug.Log("Her er T! : " + t);
     }
 
 }

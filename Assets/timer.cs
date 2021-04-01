@@ -30,7 +30,6 @@ public class timer : MonoBehaviour
 
     public float GetTimeSurvived()
     {
-        Debug.Log("Tid overløvet" + timeSurvived);
         return timeSurvived;
     }
 
