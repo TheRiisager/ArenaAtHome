@@ -21,7 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] Animator animator;
 
     private Vector3 lastPosition;
-    private Transform transform;
+    private Transform transformer;
 
     [SerializeField] Transform characterTransform;
 
@@ -34,8 +34,8 @@ public class PlayerMovementController : MonoBehaviour
         startingRotation = cameraFollowTarget.localRotation.eulerAngles;
         inputManager = PlayerInputManager.Instance;
         characterController = GetComponent<CharacterController>();
-        transform = GetComponent<Transform>();
-        lastPosition = transform.position;
+        transformer = GetComponent<Transform>();
+        lastPosition = transformer.position;
     }
     void Update()
     {
@@ -50,7 +50,7 @@ public class PlayerMovementController : MonoBehaviour
         //rotate character
         Quaternion desiredCharacterRotation = cameraFollowTarget.rotation;
         desiredCharacterRotation.Set(0, desiredCharacterRotation.y, 0, desiredCharacterRotation.w);
-        transform.rotation = desiredCharacterRotation;
+        transformer.rotation = desiredCharacterRotation;
 
         //move
         groundedPlayer = characterController.isGrounded;
@@ -88,13 +88,13 @@ public class PlayerMovementController : MonoBehaviour
 
     void LateUpdate()
     {
-        lastPosition = transform.position;
+        lastPosition = transformer.position;
     }
 
     float calculateVelocity()
     {
         float velocity;
-        float distance = Vector3.Distance(lastPosition, transform.position);
+        float distance = Vector3.Distance(lastPosition, transformer.position);
 
         velocity = distance / Time.deltaTime;
 
